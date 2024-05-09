@@ -1,4 +1,4 @@
-# Using lightweight base image
+# Using golang 1.20 base image
 FROM golang:1.20
 
 # Set the working directory inside the container
@@ -20,15 +20,13 @@ LABEL name="http-echo" \
 # Copy the source code into the container
 COPY . .
 
+# Expose the port the application listens on
 EXPOSE 5678/tcp
 
 ENV ECHO_TEXT="hello-world"
 
 # Build the Go application
 RUN go build -o http-echo .
-
-# Expose the port the application listens on
-EXPOSE 8080
 
 # Command to run the executable
 CMD ["/app/http-echo"]
