@@ -1,6 +1,6 @@
-Video Link -- https://youtu.be/e42hIYkvxoQ
-============================================================= Install and Configure the Jenkins-Master & Jenkins-Agent =============================================================
-## Install Java
+********** INSTALL & CONFIG JENKINS_MASTER & JENKINS_AGENT ********************
+
+#1. Install Java
 $ sudo apt update
 $ sudo apt upgrade
 $ sudo nano /etc/hostname
@@ -8,7 +8,7 @@ $ sudo init 6
 $ sudo apt install openjdk-17-jre
 $ java -version
 
-## Install Jenkins
+#2. Install Jenkins
 Refer--https://www.jenkins.io/doc/book/installing/linux/
 curl -fsSL https://pkg.jenkins.io/debian/jenkins.io-2023.key | sudo tee \
   /usr/share/keyrings/jenkins-keyring.asc > /dev/null
@@ -26,18 +26,18 @@ $ sudo service sshd reload
 $ ssh-keygen OR $ ssh-keygen -t ed25519
 $ cd .ssh
 
-============================================================= Install and Configure the SonarQube =============================================================
-## Update Package Repository and Upgrade Packages
+********** INSTALL AND CONFIGURE SONARQUBE *********************************
+#1. Update Package Repository and Upgrade Packages
     $ sudo apt update
     $ sudo apt upgrade
-## Add PostgresSQL repository
+#2. Add PostgresSQL repository
     $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
     $ wget -qO- https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo tee /etc/apt/trusted.gpg.d/pgdg.asc &>/dev/null
-## Install PostgreSQL
+#3. Install PostgreSQL
     $ sudo apt update
     $ sudo apt-get -y install postgresql postgresql-contrib
     $ sudo systemctl enable postgresql
-## Create Database for Sonarqube
+#4. Create Database for Sonarqube
     $ sudo passwd postgres
     $ su - postgres
     $ createuser sonar
@@ -47,45 +47,47 @@ $ cd .ssh
     $ grant all privileges on DATABASE sonarqube to sonar;
     $ \q
     $ exit
-## Add Adoptium repository
+#5 Add Adoptium repository
     $ sudo bash
     $ wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | tee /etc/apt/keyrings/adoptium.asc
     $ echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | tee /etc/apt/sources.list.d/adoptium.list
- ## Install Java 17
+#6. Install Java 17
     $ apt update
     $ apt install temurin-17-jdk
     $ update-alternatives --config java
     $ /usr/bin/java --version
     $ exit 
-## Linux Kernel Tuning
+#7. Linux Kernel Tuning
    # Increase Limits
     $ sudo vim /etc/security/limits.conf
     //Paste the below values at the bottom of the file
     sonarqube   -   nofile   65536
     sonarqube   -   nproc    4096
 
-    # Increase Mapped Memory Regions
+#8. Increase Mapped Memory Regions
     sudo vim /etc/sysctl.conf
     //Paste the below values at the bottom of the file
     vm.max_map_count = 262144
 
-#### Sonarqube Installation ####
-## Download and Extract
+#9. Download and Extract
     $ sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-9.9.0.65466.zip
     $ sudo apt install unzip
     $ sudo unzip sonarqube-9.9.0.65466.zip -d /opt
     $ sudo mv /opt/sonarqube-9.9.0.65466 /opt/sonarqube
-## Create user and set permissions
+
+#10. Create user and set permissions
      $ sudo groupadd sonar
      $ sudo useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar
      $ sudo chown sonar:sonar /opt/sonarqube -R
-## Update Sonarqube properties with DB credentials
+
+#11. Update Sonarqube properties with DB credentials
      $ sudo vim /opt/sonarqube/conf/sonar.properties
      //Find and replace the below values, you might need to add the sonar.jdbc.url
      sonar.jdbc.username=sonar
      sonar.jdbc.password=sonar
      sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
-## Create service for Sonarqube
+
+#12. Create service for Sonarqube
 $ sudo vim /etc/systemd/system/sonar.service
 //Paste the below into the file
      [Unit]
@@ -108,12 +110,12 @@ $ sudo vim /etc/systemd/system/sonar.service
      [Install]
      WantedBy=multi-user.target
 
-## Start Sonarqube and Enable service
+#13. Start Sonarqube and Enable service
      $ sudo systemctl start sonar
      $ sudo systemctl enable sonar
      $ sudo systemctl status sonar
 
-## Watch log files and monitor for startup
+#14. Watch log files and monitor for startup
      $ sudo tail -f /opt/sonarqube/logs/sonar.log
 
 ============================================================= Setup Bootstrap Server for eksctl and Setup Kubernetes using eksctl =============================================================
