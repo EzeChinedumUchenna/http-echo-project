@@ -34,10 +34,8 @@ pipeline {
                             -Dsonar.projectKey=http-echo-project \
                             -Dsonar.projectName="http-echo-project" \
                             -Dsonar.sources=. \
-                            -Dsonar.go.coverage.reportPaths=coverage.out
-                            -Dsonar.exclusions=**/*_test.go \
-                            -Dsonar.tests=. \
-                            -Dsonar.test.inclusions=**/*_test.go
+                            -Dsonar.go.coverage.reportPaths=coverage.out \
+                            -Dsonar.tests=. 
                         """
                     }
                 }
