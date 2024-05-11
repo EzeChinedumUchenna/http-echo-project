@@ -108,7 +108,7 @@ pipeline {
    }  
 
 } **/
-     stage('DEPLOY VIA CD PIPELINE') {
+     stage('TRIGGER CD PIPELINE') {
             steps {
                     script {
                       
