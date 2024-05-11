@@ -35,7 +35,7 @@ pipeline {
                             -Dsonar.projectName="http-echo-project" \
                             -Dsonar.sources=. \
                             -Dsonar.go.coverage.reportPaths=coverage.out \
-                            -Dsonar.tests=. 
+                        
                         """
                     }
                 }
