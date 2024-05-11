@@ -34,7 +34,6 @@ pipeline {
                     // Navigate to the directory containing the Dockerfile
                     dir('http-echo-project') {
                         // Build the Docker image
-                        sh 'sudo chmod 760 /var/run/docker.sock'
                         sh 'docker build -t nedumacr.azurecr.io/http-echo-project:$BUILD_NUMBER .'
                   }
                 }
