@@ -16,25 +16,25 @@ pipeline {
  
     stages {
 
-        stage('Checkout') {
+        stage('CLEAN WORKSPACE & CHECKOUT CODE') {
             steps {
                 script {
                     // Clean workspace before checking out
                     deleteDir()
 
                     // Checkout the code from the GitHub repository
-                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'emailApp']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/EzeChinedumUchenna/emailApp.git']]])
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'http-echo-project']], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/EzeChinedumUchenna/emailApp.git']]])
                 }
             }
         }
 
-        stage("image") {
+        stage("BUILD IMAGE") {
             steps {
                 script {
                     // Navigate to the directory containing the Dockerfile
-                    dir('emailApp') {
+                    dir('http-echo-project') {
                         // Build the Docker image
-                        sh 'docker build -t nedumacr.azurecr.io/nedumpythonapp:$BUILD_NUMBER .'
+                        sh 'docker build -t nedumacr.azurecr.io/http-echo-project:$BUILD_NUMBER .'
                   }
                 }
             }
