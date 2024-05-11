@@ -28,6 +28,33 @@ pipeline {
             }
         }
 
+        stage('SONARQUBE SCAN') {
+            steps {
+                script {
+                    // Use the configured SonarScanner installation
+                    withSonarQubeEnv('sonarqube-server') {
+                        sh """
+                            ${SONARSCANNER_HOME}/bin/sonar-scanner \
+                            -Dsonar.projectKey=http-echo-project \
+                            -Dsonar.projectName="My Go Lang App" \
+                            -Dsonar.sources=. \
+                            -Dsonar.go.coverage.reportPaths=coverage.out
+                        """
+                    }
+                }
+            }
+        }
+
+        stage('QUALITY GATE ANALYSIS') {
+          steps {
+            script {
+             timeout(time: 3, unit:'MINUTES') {
+             waitForQualityGate abortPipeline: false, credentialsId: 'OpeEmailAppCredential'
+          }
+        }
+     }
+   } 
+
         stage("BUILD IMAGE") {
             steps {
                 script {
@@ -39,6 +66,8 @@ pipeline {
                 }
             }
         }
+
+        
       /** stage('SonarQube Scan') {
             steps {
                 script {
