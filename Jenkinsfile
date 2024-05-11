@@ -32,7 +32,7 @@ pipeline {
                         sh """
                             ${SONARSCANNER_HOME}/bin/sonar-scanner \
                             -Dsonar.projectKey=http-echo-project \
-                            -Dsonar.projectName="My Go Lang App" \
+                            -Dsonar.projectName="http-echo-project" \
                             -Dsonar.sources=. \
                             -Dsonar.go.coverage.reportPaths=coverage.out
                         """
@@ -45,7 +45,7 @@ pipeline {
           steps {
             script {
              timeout(time: 3, unit:'MINUTES') {
-             waitForQualityGate abortPipeline: false, credentialsId: 'OpeEmailAppCredential'
+             waitForQualityGate abortPipeline: false, credentialsId: 'Jenkins-sonaqube-Token'
           }
         }
      }
