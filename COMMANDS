@@ -36,12 +36,12 @@ $ cd .ssh
 #3. Add the PostgreSQL repository.
     $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ `lsb_release -cs`-pgdg main" >> /etc/apt/sources.list.d/pgdg.list'
 #4. Add the PostgreSQL signing key.
-    $ wget -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
-
+    $ get -q https://www.postgresql.org/media/keys/ACCC4CF8.asc -O - | sudo apt-key add -
 #5. Install PostgreSQL
     $ sudo apt update
-    $ sudo apt install postgresql postgresql-contrib -y
+    $sudo apt install postgresql postgresql-contrib -y
     $ sudo systemctl enable postgresql
+    $ sudo apt install postgresql postgresql-contrib -y
 #6. Create Database for Sonarqube
     $ sudo passwd postgres
     $ su - postgres
@@ -63,7 +63,7 @@ $ cd .ssh
 
 #8. Create user and set permissions
      $ sudo groupadd sonar
-     $ sudo useradd -c "user to run SonarQube" -d /opt/sonarqube -g sonar sonar
+     $ sudo useradd -d /opt/sonarqube -g sonar sonar
      $ sudo chown sonar:sonar /opt/sonarqube -R
 
 #9. Update Sonarqube properties with DB credentials
@@ -72,10 +72,13 @@ $ cd .ssh
      sonar.jdbc.username=sonar
      sonar.jdbc.password=sonar
      sonar.jdbc.url=jdbc:postgresql://localhost:5432/sonarqube
+#10. Edit the sonar script file.
+     $ sudo nano /opt/sonarqube/bin/linux-x86-64/sonar.sh
+    About 50 lines down, locate this line or add it to the begininning:
+    #RUN_AS_USER=sonar
 
-#10. Create service for Sonarqube
-sudo  /opt/sonarqube/bin/linux-x86-64/sonar.sh
-$ sudo vim /etc/systemd/system/sonar.service
+#11. Create service for Sonarqube
+    $ sudo vim /etc/systemd/system/sonar.service
 //Paste the below into the file
      [Unit]
      Description=SonarQube service
@@ -102,8 +105,25 @@ $ sudo vim /etc/systemd/system/sonar.service
      $ sudo systemctl enable sonar
      $ sudo systemctl status sonar
 
-#10. Watch log files and monitor for startup
+#12. Watch log files and monitor for startup
      $ sudo tail -f /opt/sonarqube/logs/sonar.log
+
+#13. Edit the sysctl configuration file.
+     $ sudo nano /etc/sysctl.conf
+
+Add the following lines.
+
+ vm.max_map_count=262144
+ fs.file-max=65536
+ ulimit -n 65536
+ ulimit -u 4096
+
+#14. Reboot the system to apply the changes.
+     $ sudo reboot
+
+#15. Access SonarQube Web Interface
+Access SonarQube in a web browser at your server's IP address on port 9000. For example:
+http://192.0.2.123:9000
 
 ============================================================= Setup Bootstrap Server for eksctl and Setup Kubernetes using eksctl =============================================================
 ## Install AWS Cli on the above EC2
