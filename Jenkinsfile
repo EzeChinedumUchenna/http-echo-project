@@ -64,33 +64,6 @@ pipeline {
         }
 
         
-      /** stage('SonarQube Scan') {
-            steps {
-                script {
-                    // Use the configured SonarScanner installation
-                    withSonarQubeEnv('sonarqube-server') {
-                        sh """
-                            ${SONARSCANNER_HOME}/bin/sonar-scanner \
-                            -Dsonar.projectKey=your_project_key \
-                            -Dsonar.projectName=YourProjectName \
-                            -Dsonar.projectVersion=1.0 \
-                            -Dsonar.sources=. \
-                            -Dsonar.python.coverage.reportPaths=coverage.xml \
-                            -Dsonar.python.xunit.reportPath=test-reports.xml
-                        """
-                    }
-                }
-            }
-        }
-    stage('SonarQube Quality Gate') {
-      steps {
-        script {
-         timeout(time: 3, unit:'MINUTES') {
-             waitForQualityGate abortPipeline: false, credentialsId: 'OpeEmailAppCredential'
-          }
-        }
-     }
-   } 
     stage('Push to ACR') {
             steps {
                 // Push the Docker image to Azure Container Registry
@@ -113,19 +86,7 @@ pipeline {
               //  }
             //}
         //}
-    } **/
-    stage('Container Image Scanning using Trivy') {
-            steps {
-                    script {
-                        //def trivyOutput = sh(script: 'trivy image --severity HIGH --exit-code 1 nedumacr.azurecr.io/nedumpythonapp:$BUILD_NUMBER', returnStdout: true)
-                        def trivyOutput = sh(script: 'trivy image --severity HIGH nedumacr.azurecr.io/nedumpythonapp:$BUILD_NUMBER', returnStdout: true) // We remove the "--exit-code 1" to allow the pipeline to continue even when he severity id high
-                        echo "Trivy scan results: ${trivyOutput}"
-                        // In the above code snippet, the trivy command scans the container image for vulnerabilities with High severity and returns an exit code of 1 if any are found. 
-                        // The --exit-code 1 option causes the pipeline process to stop when High severity vulnerabilities are detected. Replace <IMAGE_NAME> with the name of your container image.
-                        // For now I remove the --exit-code 1 as this is just a POC
-                    }
-                }
-            }
+    }
    stage('Clean Up Artifact') {
             steps {
                     script {
@@ -146,7 +107,7 @@ pipeline {
    }  
 
 } **/
-     stage('Trigger CD pipeline') {
+     stage('DEPLOY VIA CD PIPELINE') {
             steps {
                     script {
                       
