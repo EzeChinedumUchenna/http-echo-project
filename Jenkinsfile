@@ -91,7 +91,7 @@ pipeline {
    stage('Clean Up Artifact') {
             steps {
                     script {
-                        sh 'docker rmi nedumacr.azurecr.io/nedumpythonapp:$BUILD_NUMBER'
+                        sh 'docker rmi anpauthuser.azurecr.io/http-echo-project:$BUILD_NUMBER'
                     }
             }
    }
@@ -157,7 +157,9 @@ pipeline {
                 }
             }
          } 
-    }
+     }
+
+    //PUSHING NOTIFICATION TO MY EMAIL
    post {
         failure {
             script {
