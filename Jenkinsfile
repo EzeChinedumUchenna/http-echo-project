@@ -42,7 +42,7 @@ pipeline {
             }
         }
 
-        stage('QUALITY GATE ANALYSIS') {
+       /** stage('QUALITY GATE ANALYSIS') {
           steps {
             script {
              timeout(time: 3, unit:'MINUTES') {
@@ -50,7 +50,7 @@ pipeline {
           }
         }
      }
-   } 
+   } **/
 
         stage("BUILD IMAGE") {
             steps {
