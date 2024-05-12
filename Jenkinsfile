@@ -65,7 +65,7 @@ pipeline {
         }
 
         
-    stage('Push to ACR') {
+    stage('PUSH TO AZURE CONTAINER REGISTRY') {
             steps {
                 // Push the Docker image to Azure Container Registry
                 script {
