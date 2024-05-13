@@ -115,7 +115,7 @@ pipeline {
                        withCredentials([usernamePassword(credentialsId: 'github_Credential', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     // First we are going to attach a metadata to our commit. Like email and username, else Jenkins will complain. This is very important and a must-have at first commit but can be remove aftr that.
                         // Navigate into the 'emailApp' directory
-                        dir('emailApp') {
+                        dir('http-echo-project') {
                         sh 'git init .'
                         sh 'git config user.email "nedum_jenkins@gmail.com"' 
                         sh 'git config user.name "jenkins"'
@@ -126,7 +126,7 @@ pipeline {
                     
 
                     // Because my Github Password contain special character @, I will need to encode it else it wont work with Jenkins.
-                        //def encodedPassword = URLEncoder.encode(PASS, "UTF-8")
+                        def encodedPassword = URLEncoder.encode(PASS, "UTF-8")
 
                         // Set the Git remote URL with the encoded password
                         sh "git remote -v | grep origin || git remote add origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/emailApp-GitOps "
