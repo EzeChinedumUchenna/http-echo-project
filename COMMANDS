@@ -1,4 +1,6 @@
-********** INSTALL & CONFIG JENKINS_MASTER & JENKINS_AGENT ********************
+*******************************************************************************************************************************************************************
+INSTALL & CONFIG JENKINS_MASTER & JENKINS_AGENT 
+********************************************************************************************************************************************************************
 
 #1. Install Java
 $ sudo apt update
@@ -26,7 +28,9 @@ $ sudo service sshd reload
 $ ssh-keygen OR $ ssh-keygen -t ed25519
 $ cd .ssh
 
-********** INSTALL AND CONFIGURE SONARQUBE *********************************
+*********************************************************************************************************************************************************************************
+  INSTALL AND CONFIGURE SONARQUBE
+*********************************************************************************************************************************************************************************
 #1.Install Open JDK first. NOTE Sonarqube require Java version 17
     $ sudo apt install openjdk-17-jre-headless
 
@@ -128,7 +132,9 @@ http://192.0.2.123:9000
 ===== TERRAFORM SCRIPT FOR AZURE KUBERNETES DEPLOYMENT =====
 
 
-============================================================= ArgoCD Installation on EKS Cluster and Add EKS Cluster to ArgoCD =============================================================
+=======================================================================================================================================================================================
+ArgoCD Installation on AKS Cluster and Add AKS Cluster to ArgoCD 
+=======================================================================================================================================================================================
 1 ) First, create a namespace
     $ kubectl create namespace argocd
 
@@ -148,26 +154,32 @@ http://192.0.2.123:9000
 6 ) Wait about 2 minutes for the LoadBalancer creation
     $ kubectl get svc -n argocd
 
+Note use the IP address of the Load balancer to access ArgoCD on the Browser. Lets Assume the IP = 51.8.235.100. Make sure your change the Password
+
 7 ) Get pasword and decode it.
     $ kubectl get secret argocd-initial-admin-secret -n argocd -o yaml
-    $ echo WXVpLUg2LWxoWjRkSHFmSA== | base64 --decode
+    $ echo RUEtTlBLbEZCcVBHZjlVLQ== | base64 --decode
 
-## Add EKS Cluster to ArgoCD
+## Add AKS Cluster to ArgoCD
 9 ) login to ArgoCD from CLI
-    $ argocd login a2255bb2bb33f438d9addf8840d294c5-785887595.ap-south-1.elb.amazonaws.com --username admin
+    $ argocd login 51.8.235.100 --username admin
 
 10 ) 
      $ argocd cluster list
+  Note: From the list we can only see a default Cluster in the ArgoCD
 
-11 ) Below command will show the EKS cluster
+11 ) Below command will show the AKS cluster name. Here my Cluster name is myAKS
      $ kubectl config get-contexts
 
-12 ) Add above EKS cluster to ArgoCD with below command
-     $ argocd cluster add i-08b9d0ff0409f48e7@virtualtechbox-cluster.ap-south-1.eksctl.io --name virtualtechbox-eks-cluster
+12 ) Add above AKS cluster to ArgoCD with below command
+     $ argocd cluster add myAKS --name myAKS-Cluster
+Note: "myAKS" is the name of my Kubernetes Cluster  while "myAKS-Cluster" is the name given to my cluster in ArgoCD
 
-13 ) $ kubectl get svc
+13) For test and confirmation Purpose 
+    $ argocd cluster list
+
+14. ) $ kubectl get svc
 ============================================================= Cleanup =============================================================
 $ kubectl get all
 $ kubectl delete deployment.apps/virtualtechbox-regapp       //it will delete the deployment
 $ kubectl delete service/virtualtechbox-service              //it will delete the service
-$ eksctl delete cluster virtualtechbox --region ap-south-1     OR    eksctl delete cluster --region=ap-south-1 --name=virtualtechbox-cluster      //it will delete the EKS cluster
