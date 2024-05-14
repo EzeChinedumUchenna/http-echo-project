@@ -5,7 +5,7 @@ metadata:
   label:
     app: {{ include "http-echo-project-chart.name" . }}
 spec:
-  replicas: {{ .Value.replicaCount }}
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: {{ include "http-echo-project-chart.name" . }}
@@ -19,4 +19,4 @@ spec:
         image: {{ .Values.image.repository }}
         pullPolicy: {{ .Values.image.pullPolicy }}
         ports:
-        - containerPort: {{ .Value.deployment.containerport }}
+        - containerPort: {{ .Values.deployment.containerport }}
