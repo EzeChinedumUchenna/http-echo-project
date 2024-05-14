@@ -1,18 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: aspnetapp
+  name:  {{ include "http-echo-project-chart.fullname" . }}-ingress
   annotations:
-    kubernetes.io/ingress.class: azure/application-gateway
+    {{ .Values.annotations.kubernetes.io/ingress.class }}
 spec:
   rules:
   - http:
       paths:
-      - path: /
-        pathType: Exact
+      - path: {{ .Values.ingress.hosts.paths.path }}
+        pathType: {{ .Values.ingress.hosts.paths.pathType }}
         backend:
           service:
-            name: aspnetapp
+            name: {{ include "http-echo-project-chart.fullname" . }}-svc
             port:
-              number: 80
-        pathType: Exact
+              number: {{ .Values.service.port }}
