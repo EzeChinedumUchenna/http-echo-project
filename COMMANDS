@@ -129,8 +129,6 @@ Add the following lines.
 Access SonarQube in a web browser at your server's IP address on port 9000. For example:
 http://192.0.2.123:9000
 
-===== TERRAFORM SCRIPT FOR AZURE KUBERNETES DEPLOYMENT =====
-
 
 =======================================================================================================================================================================================
 ArgoCD Installation on AKS Cluster and Add AKS Cluster to ArgoCD 
