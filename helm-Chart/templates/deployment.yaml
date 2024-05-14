@@ -1,19 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: {{ include "http-echo-project-chart.fullname" . }}-deployment
+  label:
+    app: {{ include "http-echo-project-chart.name" . }}
 spec:
-  replicas: 1
+  replicas: {{ .Value.replicaCount }}
   selector:
     matchLabels:
-      app: nginx
+      app: {{ include "http-echo-project-chart.name" . }}
   template:
     metadata:
       labels:
-        app: nginx
+        app: {{ include "http-echo-project-chart.name" . }}
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.image.repository }}
         ports:
-        - containerPort: 80
+        - containerPort: {{ .Value.deployment.containerport }}
