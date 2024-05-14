@@ -3,14 +3,13 @@ kind: Ingress
 metadata:
   name:  {{ include "http-echo-project-chart.fullname" . }}-ingress
   annotations:
-    {{ .Values.annotations.kubernetes.io/ingress.class }}
+    kubernetes.io/ingress.class: azure/application-gateway
 spec:
   rules:
   - http:
       paths:
-      - path: {{ .Values.ingress.hosts.paths.path }}
-        pathType: {{ .Values.ingress.hosts.paths.pathType }}
-        backend:
+      - path: /
+        pathType: Exact
           service:
             name: {{ include "http-echo-project-chart.fullname" . }}-svc
             port:
