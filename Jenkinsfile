@@ -119,7 +119,7 @@ pipeline {
                         sh 'git init .'
                         sh 'git config user.email "nedum_jenkins@gmail.com"' 
                         sh 'git config user.name "jenkins"'
-                        //sh "sudo snap install helm --classic"
+                        sh "sudo snap install helm --classic"
                         sh "cd helm-Chart"
                         sh "helm template . > kubernetes-template.yaml"
                         sh "ls -al"
