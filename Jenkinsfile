@@ -137,7 +137,9 @@ pipeline {
                          sh "git remote set-url origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/http-echo-project-CD "
                         //sh 'git config pull.rebase true'
                         sh "git config pull.rebase true"
+                        sh "git stash"
                         sh "git pull origin main"
+                        sh "git stash apply"
                         sh "ls -al"
                         //sh 'git config pull.rebase false'
                         //sh 'git pull origin HEAD:refs/heads/main'
