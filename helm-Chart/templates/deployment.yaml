@@ -2,8 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "http-echo-project-chart.fullname" . }}-deployment
-  label:
-    app: {{ include "http-echo-project-chart.name" . }}
+  #label:
+   #app: {{ include "http-echo-project-chart.name" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -17,6 +17,6 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         image: {{ .Values.image.repository }}
-        pullPolicy: {{ .Values.image.pullPolicy }}
+        #pullPolicy: {{ .Values.image.pullPolicy }}
         ports:
         - containerPort: {{ .Values.deployment.containerport }}
