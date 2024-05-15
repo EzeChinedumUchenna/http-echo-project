@@ -153,7 +153,7 @@ pipeline {
                         //sh 'git add service.yaml'
                         sh 'git add .'
                         sh 'git commit -m "updated file"'
-                        sh 'git fetch origin HEAD:refs/heads/main'
+                        sh 'git pull origin main'
                         sh 'git push origin HEAD:refs/heads/main' //here I want to push to main branch. Selete any branch you want to push to Eg sh 'git push origin HEAD:refs/heads/bug-fix'
                         //sh 'git push HEAD:main'
                        }
