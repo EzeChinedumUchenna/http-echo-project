@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: 
+  repository: anpauthuser.azurecr.io/http-echo-project:$BUILD_NUMBER
   pullPolicy: IfNotPresent
 
 deployment:
