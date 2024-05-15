@@ -151,8 +151,8 @@ pipeline {
                         sh "cat values.yaml"
                         //sh 'git add deployment.yaml'
                         //sh 'git add service.yaml'
-                        sh 'git add kubernetes-template.yaml'
-                        sh 'git commit -m "updated kubernetes-template.yaml file"'
+                        sh 'git add .'
+                        sh 'git commit -m "updated file"'
                         sh 'git push origin HEAD:refs/heads/main' //here I want to push to main branch. Selete any branch you want to push to Eg sh 'git push origin HEAD:refs/heads/bug-fix'
                         //sh 'git push HEAD:main'
                        }
