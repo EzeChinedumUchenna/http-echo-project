@@ -118,9 +118,8 @@ pipeline {
                         dir('http-echo-project') {
                               sh "ls -al"
                             dir('helm-Chart') {
-                              sh "cd /var/jenkins_home/workspace/interswitch-Project/http-echo-project/helm-Chart"
                               sh "ls -al"
-                              sh 'git init .'
+                              sh 'git init . '
                               sh 'git config user.email "http-echo@gmail.com"' 
                               sh 'git config user.name "http-echo"'
                         // sh "sudo snap install helm --classic"
@@ -134,16 +133,17 @@ pipeline {
                             def encodedPassword = URLEncoder.encode(PASS, "UTF-8")
 
                         // Set the Git remote URL with the encoded password
-                        sh "git remote -v | grep origin || git remote add origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/http-echo-project-CD "
-                        sh "git remote set-url origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/http-echo-project-CD "
+                         sh "git remote -v | grep origin || git remote add origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/http-echo-project-CD "
+                         sh "git remote set-url origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/http-echo-project-CD "
                         //sh 'git config pull.rebase true'
                         //sh "git config pull.rebase true"
                         //sh "git pull origin HEAD:refs/heads/main http-echo-project-CD"
                         sh "ls -al"
                         //sh 'git config pull.rebase false'
                         //sh 'git pull origin HEAD:refs/heads/main'
-                        sh 'git fetch origin HEAD:refs/heads/main'
-                        sh 'git merge origin/main main'
+                        sh 'git fetch origin'
+                        // sh 'git fetch origin HEAD:refs/heads/main'
+                        // sh 'git merge origin/main main'
                         //sh "sed -i 's/nedumpythonapp:*/nedumpythonapp:${BUILD_NUMBER}/g' deployment.yaml"
                         //sh "sed -i 's/nedumpythonapp*/nedumpythonapp:${BUILD_NUMBER}/g' deployment.yaml"
                         sh "sed -i 's/http-echo-project.*/http-echo-project:${BUILD_NUMBER}/g' values.yaml"
