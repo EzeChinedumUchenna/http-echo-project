@@ -1,4 +1,4 @@
-replicaCount: 4
+replicaCount: 2
 
 image:
   repository: anpauthuser.azurecr.io/http-echo-project:$BUILD_NUMBER
