@@ -10,7 +10,7 @@ spec:
       paths:
       - path: /
         pathType: Exact
-          service:
-            name: {{ include "http-echo-project-chart.fullname" . }}-svc
-            port:
-              number: {{ .Values.service.port }}
+        service:
+          name: {{ include "http-echo-project-chart.fullname" . }}-svc
+          port:
+            number: {{ .Values.service.port }}
