@@ -46,7 +46,8 @@ pipeline {
           steps {
             script {
              timeout(time: 3, unit:'MINUTES') {
-             waitForQualityGate abortPipeline: true, credentialsId: 'Jenkins-sonaqube-Token'
+             waitForQualityGate abortPipeline: true
+            //waitForQualityGate abortPipeline: true, credentialsId: 'Jenkins-sonaqube-Token'
           }
         }
      }
