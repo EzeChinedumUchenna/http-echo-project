@@ -149,9 +149,9 @@ pipeline {
                         sh "cat values.yaml"
                         sh 'git add .'
                         sh 'git commit -m "updated file"'
-                        sh 'git stash'
-                        sh 'git pull origin main --rebase'
-                        sh 'git stash apply'
+                        //sh 'git stash'
+                        //sh 'git pull origin main --rebase'
+                        //sh 'git stash apply'
                         sh 'git push origin HEAD:refs/heads/main' //here I want to push to main branch. Selete any branch you want to push to Eg sh 'git push origin HEAD:refs/heads/bug-fix'
                         //sh 'git push HEAD:main'
                        }
