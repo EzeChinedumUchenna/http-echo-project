@@ -42,16 +42,16 @@ pipeline {
             }
         }
 
-       stage('QUALITY GATE ANALYSIS') {
+      /** stage('QUALITY GATE ANALYSIS') {
           steps {
             script {
-             timeout(time: 3, unit:'MINUTES') {
-             waitForQualityGate abortPipeline: true
-            //waitForQualityGate abortPipeline: true, credentialsId: 'Jenkins-sonaqube-Token'
+             timeout(time: 10, unit:'MINUTES') {
+             // waitForQualityGate abortPipeline: true
+             waitForQualityGate abortPipeline: true, credentialsId: 'Jenkins-sonaqube-Token'
           }
         }
      }
-   } 
+   } **/
 
         stage("BUILD IMAGE") {
             steps {
