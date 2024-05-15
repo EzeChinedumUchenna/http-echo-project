@@ -1,4 +1,4 @@
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: anpauthuser.azurecr.io/http-echo-project:$BUILD_NUMBER
@@ -9,7 +9,7 @@ deployment:
 
 
 service:
-  type: ClusterIP
+  type: LoadBalancer
   port: 80
   targetport: 80
 
