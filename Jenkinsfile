@@ -145,7 +145,7 @@ pipeline {
                         //sh "sed -i 's/nedumpythonapp*/nedumpythonapp:${BUILD_NUMBER}/g' deployment.yaml"
                         sh "sed -i 's/http-echo-project.*/http-echo-project:${BUILD_NUMBER}/g' kubernetes-template.yaml"
 
-                        sh "cat deployment.yaml"
+                        sh "cat kubernetes-template.yaml"
                         //sh 'git add deployment.yaml'
                         //sh 'git add service.yaml'
                         sh 'git add kubernetes-template.yaml'
