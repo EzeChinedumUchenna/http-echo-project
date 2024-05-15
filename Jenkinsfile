@@ -155,7 +155,7 @@ pipeline {
                         //sh 'git push https://${USER}:${PASS}@github.com/EzeChinedumUchenna/http-echo-project-CD HEAD:main 
                         //sh 'origin HEAD:refs/heads/main' //here I want to push to main branch. Selete any branch you want to push to Eg sh 'git push origin HEAD:refs/heads/bug-fix'
                         //sh 'git push HEAD:main'
-                        sh 'git checkout master'
+                        sh 'git checkout -b main'
                         sh 'git push --force-with-lease origin main:main'
                        }
                       }
