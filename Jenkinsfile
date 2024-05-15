@@ -136,10 +136,6 @@ pipeline {
                          sh "git remote -v | grep origin || git remote add origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/http-echo-project-CD "
                          sh "git remote set-url origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/http-echo-project-CD "
                         //sh 'git config pull.rebase true'
-                        sh "git config pull.rebase true"
-                        sh "git stash"
-                        sh "git pull origin main"
-                        sh "git stash apply"
                         sh "ls -al"
                         //sh 'git config pull.rebase false'
                         //sh 'git pull origin HEAD:refs/heads/main'
@@ -153,7 +149,7 @@ pipeline {
                         sh "cat values.yaml"
                         sh 'git add .'
                         sh 'git commit -m "updated file"'
-                        //sh 'git pull origin main --rebase'
+                        sh 'git pull origin main --rebase'
                         sh 'git push origin HEAD:refs/heads/main' //here I want to push to main branch. Selete any branch you want to push to Eg sh 'git push origin HEAD:refs/heads/bug-fix'
                         //sh 'git push HEAD:main'
                        }
