@@ -116,14 +116,14 @@ pipeline {
                     // First we are going to attach a metadata to our commit. Like email and username, else Jenkins will complain. This is very important and a must-have at first commit but can be remove aftr that.
                         // Navigate into the 'http-echo-project' directory
                         dir('http-echo-project') {
-                        sh 'git init .'
-                        sh 'git config user.email "nedum_jenkins@gmail.com"' 
-                        sh 'git config user.name "jenkins"'
-                        sh "sudo snap install helm --classic"
                         sh "cd helm-Chart"
-                        sh "helm template . > kubernetes-template.yaml"
+                        sh 'git init .'
+                        sh 'git config user.email "http-echo@gmail.com"' 
+                        sh 'git config user.name "http-echo"'
+                        // sh "sudo snap install helm --classic"
+                        //sh "helm template . > kubernetes-template.yaml"
                         sh "ls -al"
-                        sh "cat kubernetes-template.yaml"
+                        // sh "cat kubernetes-template.yaml"
                     // Note can set the above globally for all the project by adding '--global'
                     // sh 'git config --global user.email "nedum_jenkins@gmail.com"' 
                     // sh 'git config --global user.name "nedum_jenkins"' 
@@ -143,9 +143,9 @@ pipeline {
                         sh 'git merge origin/main main'
                         //sh "sed -i 's/nedumpythonapp:*/nedumpythonapp:${BUILD_NUMBER}/g' deployment.yaml"
                         //sh "sed -i 's/nedumpythonapp*/nedumpythonapp:${BUILD_NUMBER}/g' deployment.yaml"
-                        sh "sed -i 's/http-echo-project.*/http-echo-project:${BUILD_NUMBER}/g' kubernetes-template.yaml"
+                        sh "sed -i 's/http-echo-project.*/http-echo-project:${BUILD_NUMBER}/g' values.yaml"
 
-                        sh "cat kubernetes-template.yaml"
+                        sh "cat values.yaml"
                         //sh 'git add deployment.yaml'
                         //sh 'git add service.yaml'
                         sh 'git add kubernetes-template.yaml'
