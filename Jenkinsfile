@@ -117,7 +117,7 @@ pipeline {
                         // Navigate into the 'http-echo-project' directory
                         dir('http-echo-project') {
                         sh "ls -al"
-                        sh "cd helm-Chart"
+                        sh "cd /var/jenkins_home/workspace/interswitch-Project/http-echo-project/helm-Chart"
                         sh "ls -al"
                         sh 'git init .'
                         sh 'git config user.email "http-echo@gmail.com"' 
