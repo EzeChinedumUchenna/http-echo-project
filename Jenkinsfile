@@ -120,7 +120,7 @@ pipeline {
                         sh 'git config user.email "nedum_jenkins@gmail.com"' 
                         sh 'git config user.name "jenkins"'
 
-                        sh "cd helm-chart"
+                        sh "cd helm-Chart"
                         sh "helm template . > kubernetes-template.yaml"
                         sh "ls -al"
                         sh "cat kubernetes-template.yaml"
