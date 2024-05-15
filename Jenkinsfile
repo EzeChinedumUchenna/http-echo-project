@@ -116,12 +116,13 @@ pipeline {
                     // First we are going to attach a metadata to our commit. Like email and username, else Jenkins will complain. This is very important and a must-have at first commit but can be remove aftr that.
                         // Navigate into the 'http-echo-project' directory
                         dir('http-echo-project') {
-                        sh "ls -al"
-                        sh "cd /var/jenkins_home/workspace/interswitch-Project/http-echo-project/helm-Chart"
-                        sh "ls -al"
-                        sh 'git init .'
-                        sh 'git config user.email "http-echo@gmail.com"' 
-                        sh 'git config user.name "http-echo"'
+                              sh "ls -al"
+                            dir('helm-Chart') {
+                              sh "cd /var/jenkins_home/workspace/interswitch-Project/http-echo-project/helm-Chart"
+                              sh "ls -al"
+                              sh 'git init .'
+                              sh 'git config user.email "http-echo@gmail.com"' 
+                              sh 'git config user.name "http-echo"'
                         // sh "sudo snap install helm --classic"
                         //sh "helm template . > kubernetes-template.yaml"
                         //sh "ls -al"
@@ -130,7 +131,7 @@ pipeline {
                     // sh 'git config --global user.email "nedum_jenkins@gmail.com"' 
                     // sh 'git config --global user.name "nedum_jenkins"' 
                     // Because my Github Password contain special character @, I will need to encode it else it wont work with Jenkins.
-                        def encodedPassword = URLEncoder.encode(PASS, "UTF-8")
+                            def encodedPassword = URLEncoder.encode(PASS, "UTF-8")
 
                         // Set the Git remote URL with the encoded password
                         sh "git remote -v | grep origin || git remote add origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/http-echo-project-CD "
@@ -155,6 +156,7 @@ pipeline {
                         sh 'git push origin HEAD:refs/heads/main' //here I want to push to main branch. Selete any branch you want to push to Eg sh 'git push origin HEAD:refs/heads/bug-fix'
                         //sh 'git push HEAD:main'
                        }
+                      }
                     }
                 }
             }
