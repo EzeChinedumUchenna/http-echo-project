@@ -114,42 +114,42 @@ pipeline {
                       
                        withCredentials([usernamePassword(credentialsId: 'github_Credential', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     // First we are going to attach a metadata to our commit. Like email and username, else Jenkins will complain. This is very important and a must-have at first commit but can be remove aftr that.
-                        // Navigate into the 'emailApp' directory
+                        // Navigate into the 'http-echo-project' directory
                         dir('http-echo-project') {
                         sh 'git init .'
                         sh 'git config user.email "nedum_jenkins@gmail.com"' 
                         sh 'git config user.name "jenkins"'
+
+                        sh "cd helm-chart"
+                        sh "helm template . > kubernetes-template.yaml"
+                        sh "ls -al"
+                        sh "cat kubernetes-template.yaml"
                     // Note can set the above globally for all the project by adding '--global'
                     // sh 'git config --global user.email "nedum_jenkins@gmail.com"' 
                     // sh 'git config --global user.name "nedum_jenkins"' 
-                    // we want git to print out the following information
-                    
-
                     // Because my Github Password contain special character @, I will need to encode it else it wont work with Jenkins.
                         def encodedPassword = URLEncoder.encode(PASS, "UTF-8")
 
                         // Set the Git remote URL with the encoded password
-                        sh "git remote -v | grep origin || git remote add origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/emailApp-GitOps "
-                        sh "git remote set-url origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/emailApp-GitOps "
+                        sh "git remote -v | grep origin || git remote add origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/http-echo-project-CD "
+                        sh "git remote set-url origin https://${USER}:${PASS}@github.com/EzeChinedumUchenna/http-echo-project-CD "
                         //sh 'git config pull.rebase true'
                         //sh "git config pull.rebase true"
-                        //sh "git pull origin HEAD:refs/heads/main emailApp-GitOps"
-                       
+                        //sh "git pull origin HEAD:refs/heads/main http-echo-project-CD"
                         sh "ls -al"
-                        sh "cat deployment.yaml"
                         //sh 'git config pull.rebase false'
                         //sh 'git pull origin HEAD:refs/heads/main'
                         sh 'git fetch origin HEAD:refs/heads/main'
                         sh 'git merge origin/main main'
                         //sh "sed -i 's/nedumpythonapp:*/nedumpythonapp:${BUILD_NUMBER}/g' deployment.yaml"
                         //sh "sed -i 's/nedumpythonapp*/nedumpythonapp:${BUILD_NUMBER}/g' deployment.yaml"
-                          sh "sed -i 's/nedumpythonapp.*/nedumpythonapp:${BUILD_NUMBER}/g' deployment.yaml"
+                        sh "sed -i 's/http-echo-project.*/http-echo-project:${BUILD_NUMBER}/g' kubernetes-template.yaml"
 
                         sh "cat deployment.yaml"
                         //sh 'git add deployment.yaml'
                         //sh 'git add service.yaml'
-                        sh 'git add .'
-                        sh 'git commit -m "updated deployment.yaml file"'
+                        sh 'git add kubernetes-template.yaml'
+                        sh 'git commit -m "updated kubernetes-template.yaml file"'
                         sh 'git push origin HEAD:refs/heads/main' //here I want to push to main branch. Selete any branch you want to push to Eg sh 'git push origin HEAD:refs/heads/bug-fix'
                         //sh 'git push HEAD:main'
                        }
@@ -159,7 +159,7 @@ pipeline {
          } 
      }
 
-    //PUSHING NOTIFICATION TO MY EMAIL
+    //PUSHING NOTIFICATION TO MY EMAIL. this will send email to me if the build fails or succeeds
    post {
         failure {
             script {
