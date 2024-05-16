@@ -2,15 +2,13 @@
 
 This repository demonstrates a comprehensive Continuous Integration/Continuous Deployment (CI/CD) pipeline using Jenkins, SonarQube, Docker, Azure Container Registry, Argo CD, and Kubernetes. Below is a detailed explanation of each step in the workflow, accompanied by a visual diagram.
 
-### Workflow Overview
+## Workflow Overview
 The CI/CD pipeline in this repository is designed to automate the process of building, testing, and deploying applications. The workflow ensures that code changes are continuously integrated and deployed to a Kubernetes cluster with quality checks and monitoring.
 
 ![image](https://github.com/EzeChinedumUchenna/http-echo-project/assets/102483586/1ff6edc1-baff-47e3-8d35-b47cd484f701)
 
-### Pipeline Steps
-GitHub:
-
-Role: Acts as the source control repository.
+## Pipeline Steps
+* GitHub: Acts as the source control repository.
 Action: Code changes are pushed to GitHub, which triggers the Jenkins build process.
 Jenkins:
 
