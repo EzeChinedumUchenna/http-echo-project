@@ -1,12 +1,2 @@
-http-echo
-=========
-HTTP Echo is a small go web server that serves the contents it was started with
-as an HTML page.
+![image](https://github.com/EzeChinedumUchenna/http-echo-project/assets/102483586/1ff6edc1-baff-47e3-8d35-b47cd484f701)
 
-The default port is 5678, but this is configurable via the `-listen` flag:
-
-```
-http-echo -listen=:8080 -text="hello world"
-```
-
-Then visit http://localhost:8080/ in your browser.
