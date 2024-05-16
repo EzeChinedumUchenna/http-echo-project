@@ -24,6 +24,8 @@ The CI/CD pipeline in this repository automates the building, testing, and deplo
 
 * __Email Notification:__ Alerts stakeholders. Sends notifications about the deployment status. See below
 ![image](https://github.com/EzeChinedumUchenna/http-echo-project/assets/102483586/9183692e-5d9c-41a7-9a74-b26053c136e9)
+![image](https://github.com/EzeChinedumUchenna/http-echo-project/assets/102483586/e47a1c08-2b43-41be-82d5-deb5db7ecae1)
+
 
 
 ## Conclusion
