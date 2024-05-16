@@ -19,7 +19,8 @@ The CI/CD pipeline in this repository automates the building, testing, and deplo
 
 *__Kubernetes:__ Orchestrates containerized applications. Runs the deployed Docker image, ensuring the application is up and running. Monitors the health and scaling of the application. The application can be accessed via the Kubernetes service as a Load balancer
 
-![image](https://github.com/EzeChinedumUchenna/http-echo-project/assets/102483586/964bfcf5-cc35-4c84-b5ce-ed542c434f1d)
+![image](https://github.com/EzeChinedumUchenna/http-echo-project/assets/102483586/93072e54-3b47-495e-a223-0591b6986e30)
+
 
 *__Email Notification:__ Alerts stakeholders. Sends notifications about the deployment status. See below
 ![image](https://github.com/EzeChinedumUchenna/http-echo-project/assets/102483586/9183692e-5d9c-41a7-9a74-b26053c136e9)
