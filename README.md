@@ -1,4 +1,4 @@
-# CI/CD Pipeline with Jenkins, SonarQube, Docker, ArgoCD, Azure container registry, gmail, Helm and Kubernetes
+# CI/CD Pipeline with Jenkins, SonarQube, Docker, ArgoCD, Azure container registry, gmail, Helm and Azure Kubernetes Service (AKS)
 
 This repository demonstrates a comprehensive Continuous Integration/Continuous Deployment (CI/CD) pipeline using Jenkins, SonarQube, Docker, Azure Container Registry, Argo CD, and Kubernetes. Below is a detailed explanation of each step in the workflow, accompanied by a visual diagram.
 
