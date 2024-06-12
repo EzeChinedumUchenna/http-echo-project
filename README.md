@@ -5,7 +5,8 @@ This repository explains a comprehensive Continuous Integration/Continuous Deplo
 ## Workflow Overview
 The CI/CD pipeline in this repository automates the building, testing, and deploying of applications. Code changes in GitHub trigger SonarQube to check for vulnerabilities and bugs, stopping the build if any are found. If the code passes, Jenkins builds the artifact and pushes it to Azure Container Registry (ACR). Jenkins then updates a separate GitHub repository (https://github.com/EzeChinedumUchenna/http-echo-project-CD) with the Kubernetes Helm chart for continuous delivery. Argo CD monitors this repository for changes, synchronizes the Kubernetes cluster to match the desired state, and manages continuous deployment. The Kubernetes cluster runs the workload, and Gmail Notification sends alert about the pipeline's success or failure to "ezechinedum504@gmail.com"
 
-![image](https://github.com/EzeChinedumUchenna/http-echo-project/assets/102483586/1ff6edc1-baff-47e3-8d35-b47cd484f701)
+![image](https://github.com/EzeChinedumUchenna/http-echo-project/assets/102483586/c65c8504-7b74-414b-b50d-3e1ea658dafe)
+
 
 ## Pipeline Steps
 * __GitHub:__ Acts as the source control repository. Code changes are pushed to GitHub, which triggers the Jenkins build process.
